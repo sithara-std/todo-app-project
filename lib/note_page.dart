@@ -30,8 +30,9 @@ class _NotePageState extends State<NotePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 240, 218, 241), // Changed background color
       appBar: AppBar(
-        backgroundColor:const Color.fromARGB(255, 111, 13, 105),
+        backgroundColor: const Color.fromARGB(255, 111, 13, 105),
         title: const Text('Add a Note'),
       ),
       body: Padding(
@@ -53,7 +54,8 @@ class _NotePageState extends State<NotePage> {
             ElevatedButton(
               onPressed: _saveNote,
               style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white, backgroundColor: Colors.purple,
+                foregroundColor: const Color.fromARGB(255, 251, 242, 249),
+                backgroundColor: Colors.purple,
               ),
               child: const Text('Save Note'),
             ),

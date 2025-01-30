@@ -1,34 +1,31 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:myapp/note_page.dart';
 import 'package:myapp/todo_list_screen.dart';
-// Import Todo List Screen
 // ignore: depend_on_referenced_packages
-import 'package:intl/intl.dart'; // To format the current date and time
-// Import the NotePage
-import 'calendar_page.dart'; // Import the CalendarScreen
-import 'mood_tracker_screen.dart'; // Import MoodTracker Screen
-import 'reminder_page.dart'; // Import ReminderPage
+import 'package:intl/intl.dart'; 
+import 'calendar_page.dart'; 
+import 'mood_tracker_screen.dart'; 
+import 'reminder_page.dart'; 
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  HomePageState createState() => HomePageState(); // Change the state class to HomePageState
+  HomePageState createState() => HomePageState(); 
 }
 
 class HomePageState extends State<HomePage> {
   
   String currentDateTime = '';
-  int _currentIndex = 0; // Track the current tab index
+  int _currentIndex = 0; 
 
-  // Function to get the current date and time
   String getCurrentDateTime() {
     final now = DateTime.now();
     final formatter = DateFormat('yMMMd H:mm');
     return formatter.format(now);
   }
 
-  // Function to get personalized greeting based on time of day
   String getGreeting() {
     final hour = DateTime.now().hour;
     if (hour < 12) {
@@ -44,7 +41,6 @@ class HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     currentDateTime = getCurrentDateTime();
-    // Set up a periodic timer to update the time every minute
     Timer.periodic(const Duration(minutes: 1), (timer) {
       setState(() {
         currentDateTime = getCurrentDateTime();
@@ -52,26 +48,22 @@ class HomePageState extends State<HomePage> {
     });
   }
 
-  // Navigation handler for bottom navigation bar
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
     });
 
     if (index == 0) {
-      // Navigate to Calendar Screen
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const CalendarScreen()),
       );
     } else if (index == 1) {
-      // Navigate to Mood Tracker Screen
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const MoodTrackerScreen()),
       );
     } else if (index == 2) {
-      // Navigate to Reminder Page
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => const ReminderPage()),
@@ -83,7 +75,7 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:const Color.fromARGB(255, 111, 13, 105),
+        backgroundColor: const Color.fromARGB(255, 111, 13, 105),
         title: const Text(
           'Welcome to the ToDo App',
           style: TextStyle(color: Colors.white),
@@ -96,7 +88,6 @@ class HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Personalized Greeting
               Text(
                 '${getGreeting()}, User!',
                 style: const TextStyle(
@@ -105,7 +96,6 @@ class HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 20),
-              // User Profile Picture (Square)
               Container(
                 width: 280,
                 height: 210,
@@ -117,7 +107,6 @@ class HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 20),
-              // App Description
               const Text(
                 'This is your personal Todo list manager. Keep track of your tasks easily and stay organized!',
                 textAlign: TextAlign.center,
@@ -128,7 +117,6 @@ class HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 20),
-              // Current Date and Time
               Text(
                 'Current Date & Time: $currentDateTime',
                 textAlign: TextAlign.center,
@@ -139,7 +127,6 @@ class HomePageState extends State<HomePage> {
                 ),
               ),
               const SizedBox(height: 20),
-              // Button to navigate to Todo List
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
@@ -159,19 +146,18 @@ class HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Navigate to the NotePage when the button is pressed
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
+            MaterialPageRoute(builder: (context) => const NotePage()),
           );
         },
         backgroundColor: Colors.purpleAccent,
-        child: const Icon(Icons.edit), // Replace with pencil (edit) icon
+        child: const Icon(Icons.edit),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: const Color.fromARGB(255, 111, 13, 105),
         selectedItemColor: const Color.fromARGB(255, 13, 1, 13),
-        unselectedItemColor: const Color.fromARGB(137, 11, 0, 7),
+        unselectedItemColor: const Color.fromARGB(253, 246, 238, 243),
         currentIndex: _currentIndex,
         onTap: _onItemTapped,
         items: const [
